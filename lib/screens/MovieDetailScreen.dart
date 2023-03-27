@@ -184,6 +184,9 @@ class MovieDetailScreenState extends State<MovieDetailScreen> {
                                 btnText: language!.subscribeNow,
                                 onTap: () async {
                                   finish(context);
+                                  const url = 'https://byesqi.com/apple-pay/';
+
+                                  await launchURL(url);
                                   if (getStringAsync(ACCOUNT_PAGE).isNotEmpty) {
                                     await launchURL(getStringAsync(REGISTRATION_PAGE)).then((value) async {
                                       await refreshToken();
@@ -213,14 +216,12 @@ class MovieDetailScreenState extends State<MovieDetailScreen> {
                               data: HtmlWidget(
                                 '<html>${movie.restrictionSetting!.restrictMessage.validate().replaceAll('&lt;', '<').replaceAll('&gt;', '>').replaceAll('&quot;', '"').replaceAll('[embed]', '<embed>').replaceAll('[/embed]', '</embed>').replaceAll('[caption]', '<caption>').replaceAll('[/caption]', '</caption>')}</html>',
                               ),
-                              btnText: language!.subscribeNow.validate(),
-                              onTap: ()async {
+                              btnText: language!.loginNow.validate(),
+                              onTap: () {
                                 finish(context);
 
-                                const url = 'https://byesqi.com/apple-pay/';
 
-                                await launchURL(url);
-                                //SignInScreen().launch(context);
+                                SignInScreen().launch(context);
                               },
                             );
                           },
